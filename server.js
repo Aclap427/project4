@@ -3,7 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const studentsRouter = require('./routes/api/students');
-const recordsRouter = require('./routes/api/records');
+
 const app = express();
 
 require('dotenv').config();
@@ -15,7 +15,7 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/students', studentsRouter);
-app.use('/api/records', recordsRouter);
+
 app.use('/api/users', require('./routes/api/users'));
 
 app.get('/*', function (req, res) {

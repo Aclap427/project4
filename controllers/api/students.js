@@ -5,7 +5,7 @@ module.exports = {
     index,
     show,
     create,
-    delete: deleteOne,
+    delete: deleteOneStudent,
     update
 };
 
@@ -24,7 +24,7 @@ async function create(req, res) {
     res.status(201).json(student);
 }
 
-async function deleteOne(req, res) {
+async function deleteOneStudent(req, res) {
     const deletedStudent = await Student.findByIdAndRemove(req.params.id);
     res.status(200).json(deletedStudent);
 }
