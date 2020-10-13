@@ -5,6 +5,8 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
+//import * as studentAPI from '../../src/services/StudentsAPI';
+//import StudentPage from '../StudentPage/StudentPage';
 
 class App extends Component {
   constructor() {
@@ -53,6 +55,34 @@ class App extends Component {
       </div>
     );
   }
+  // state = {
+  //   students: []
+  // };
+
+  // async componentDidMount() {
+  //   const students = await studentAPI.getAll();
+  //   this.setState({ students });
+  // }
+
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <header className="App-header">
+  //         React Students CRUD
+  //         <nav>
+  //           <NavLink exact to='/'>STUDENT LIST</NavLink>
+  //         </nav>
+  //       </header>
+  //       <main>
+  //         <Route exact path='/' render={() =>
+  //           <StudentPage
+  //             students={this.state.students}
+  //           />
+  //         } />
+  //       </main>
+  //     </div>
+  //   );
+  // }
 }
 
 export default App;
