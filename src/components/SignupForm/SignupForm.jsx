@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-import '../../pages/App/App.css'
+import '../../pages/App/App.css';
+
 
 class SignupForm extends Component {
 
@@ -46,30 +47,30 @@ class SignupForm extends Component {
                         <div>
                             <input type="text"placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
                         </div>
-                    </div>
                     <div className="form-group">
-                        <div>
+                        
                             <input type="email"placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                        </div>
                     </div>
+                    
                     <div className="form-group">
-                        <div>
+                        
                             <input type="password" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
-                        </div>
                     </div>
+                    
                     <div className="form-group">
-                        <div>
-                            <input type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
-                        </div>
+                        
+                    <input type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
                     </div>
+                    
                     <div className="form-group">
                         <div className="form-group">
-                            <button className="button" disabled={this.isFormInvalid()}>Sign Up</button><br/>
-              <Link to='/'>Cancel</Link>
+                            <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px"/></button>
+                            <button type="cancel" className="cancel"><Link to='/'><img src='https://i.imgur.com/xZb5UVV.jpg' alt="cancel" width="45px"/></Link></button>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </div >
+                </div>
+            </form>
+        </div >
         );
     }
 }

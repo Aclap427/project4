@@ -47,7 +47,7 @@ class App extends Component {
               <Apple/>
           } />
           <Route exact path='/signup' render={({ history }) =>
-            <SignupPage
+              <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
 

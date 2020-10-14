@@ -2,17 +2,18 @@
 .NavBar {
     display: relative;
     top: 101px;
-    background-color:rgb(73, 64, 64);
+    background-color: black;
     padding:10px;
     text-align: center;
-    color: green;
+    color: rgb(91, 216, 91);
     font-family: 'Josefin Sans', sans-serif;
-  }
+    margin-bottom: 30px;
+}
   
   .NavBar-link {
     background-color:black;
     padding:0 20px;
-    color: green;
+    color: rgb(91, 216, 91);
     font-family: 'Josefin Sans', sans-serif;
 }
   

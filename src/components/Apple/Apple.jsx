@@ -4,8 +4,7 @@ import './Apple.css';
 
 function Apple() {
     return (
-        <div>
-            <p>Register a student</p>
+        <div id="apple">
             <img src="https://i.imgur.com/LTcI0PT.png?1" alt="apple"/>
         </div>
     );
