@@ -1,5 +1,12 @@
-* {
-    background-color: purple;
-    width:100%;
-    height:200px;
+.footer {
+    background-color:rgb(73, 64, 64);
+    color:red;
+    padding:10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+
 }

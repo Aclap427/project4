@@ -7,6 +7,10 @@ import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
 //import * as studentAPI from '../../src/services/StudentsAPI';
 //import StudentPage from '../StudentPage/StudentPage';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Apple from '../../components/Apple/Apple';
+
 
 class App extends Component {
   constructor() {
@@ -29,6 +33,10 @@ class App extends Component {
 
   render() {
     return (
+      <>
+      <div>
+        <Header/>
+      </div>
       <div>
         <NavBar
           user={this.state.user}
@@ -36,7 +44,7 @@ class App extends Component {
         />
         <Switch>
           <Route exact path='/' render={() =>
-            <div>Welcome to Hell - this is your homepage</div>
+              <Apple/>
           } />
           <Route exact path='/signup' render={({ history }) =>
             <SignupPage
@@ -52,8 +60,11 @@ class App extends Component {
             />
           } />
         </Switch>
-      </div>
+        </div>
+        <div><Footer/></div>
+      </>
     );
+      
   }
   // state = {
   //   students: []

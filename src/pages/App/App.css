@@ -1,19 +1,38 @@
-*{
-  text-align:center;
-  background-color: rgb(36, 33, 33);
-  color: rgb(230, 53, 53);
-  font-size: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;700&display=swap');
+
+#student {
+  position: absolute;
+  top:200px;
+  font-family: 'Josefin Sans', sans-serif;
+  
+  font-size: 40px;
+
 }
 
-a {
-  color: rgb(25, 155, 13);
- 
+.form-group {
+
+  text-align: center;
+  
 }
 
 input {
-  background-color: rgb(206, 200, 200);
-  color: black;
-  padding:10px;
-  border-radius:2px;
-  margin:5px;
+  font-size: 20px;
+  margin: 4px;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.container {
+  font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  margin-top:50px;
+}
+
+.button {
+  font-size: 20px;
+  font-family: 'Josefin Sans', sans-serif;
+  padding: 5px;
+  margin: 10px;
+  background-color:pink;
+  border-radius: 5px;
 }
