@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const studentsRouter = require('./routes/api/students');
+const cors = require('cors')
+
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
-
+app.use(cors());
+const studentsRouter = require('./routes/api/students');
 app.use('/api/students', studentsRouter);
 
 app.use('/api/users', require('./routes/api/users'));
