@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, /*redirect*/ } from 'react-router-dom';
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -94,6 +94,12 @@ class App extends Component {
   //     </div>
   //   );
   // }
+//   <Route exact path='/high-scores' render={() => (
+//   userService.getUser() ?
+//     <HighScoresPage />
+//     :
+//     <Redirect to='/login' />
+// )} />
 }
 
 export default App;

@@ -16,7 +16,9 @@ let studentSchema = new Schema({
     name: { type: String, required: true},
     grade: { type: String, default: null},
     record: [recordSchema],
-}, {
+    userID: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+},
+    {
     timestamps: true
 });
 
