@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch, /*redirect*/ } from 'react-router-dom';
+import { Route, Switch, /*redirect,*/ } from 'react-router-dom';
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
 import NavBar from '../../components/NavBar/NavBar';
-//import * as studentAPI from '../../src/services/StudentsAPI';
-//import StudentPage from '../StudentPage/StudentPage';
+import * as StudentsAPI from '../../services/StudentsAPI';
+import StudentPage from '../StudentPage/StudentPage';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Apple from '../../components/Apple/Apple';
@@ -17,7 +17,16 @@ class App extends Component {
     super();
     this.state = {
       user: userService.getUser()
+    
     };
+  }
+  state = {
+    students: []
+  };
+
+  async componentDidMount() {
+    const studentsFromAPI = await StudentsAPI.getAll();
+    this.setState({ studentsFromAPI });
   }
 
   /*--- Callback Methods ---*/
@@ -59,41 +68,25 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
           } />
+            <main>
+              <Route exact path='/' render={() =>
+                <StudentPage
+                  students={this.state.students}
+                />
+              } />
+            </main>
         </Switch>
         </div>
-        <div><Footer/></div>
-      </>
+        
+   
+        <div><Footer /></div>
+      );
+    }
+  </>
     );
       
   }
-  // state = {
-  //   students: []
-  // };
-
-  // async componentDidMount() {
-  //   const students = await studentAPI.getAll();
-  //   this.setState({ students });
-  // }
-
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <header className="App-header">
-  //         React Students CRUD
-  //         <nav>
-  //           <NavLink exact to='/'>STUDENT LIST</NavLink>
-  //         </nav>
-  //       </header>
-  //       <main>
-  //         <Route exact path='/' render={() =>
-  //           <StudentPage
-  //             students={this.state.students}
-  //           />
-  //         } />
-  //       </main>
-  //     </div>
-  //   );
-  // }
+  
 //   <Route exact path='/high-scores' render={() => (
 //   userService.getUser() ?
 //     <HighScoresPage />
