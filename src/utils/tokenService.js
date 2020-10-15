@@ -16,8 +16,9 @@ function setToken(token) {
 function getToken() {
     let token = localStorage.getItem('token');
     if (token) {
-        // Check if the token has expired, remove if yeahhh
-        const payload = JSON.parse(atob(token.split('.')[1]))
+        // Check if expired, remove if it is
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        // JWT's exp is expressed in seconds, not milliseconds, so convert
         if (payload.exp < Date.now() / 1000) {
             localStorage.removeItem('token');
             token = null;
@@ -28,7 +29,7 @@ function getToken() {
 
 function getUserFromToken() {
     const token = getToken();
-    return token && JSON.parse(atob(token.split('.')[1])).user;
+    return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }
 
 function removeToken() {

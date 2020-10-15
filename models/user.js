@@ -30,13 +30,13 @@ userSchema.pre('save', function (next) {
 });
 
 
-// userSchema.set('toJSON', {
-//     transform: function (doc, ret) {
-//         // remove the password property when serializing doc to JSON
-//         delete ret.password;
-//         return ret;
-//     }
-// });
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        // remove the password property when serializing doc to JSON
+        delete ret.password;
+        return ret;
+    }
+});
 
 userSchema.methods.comparePassword = function (tryPassword, cb) {
     bcrypt.compare(tryPassword, this.password, cb);

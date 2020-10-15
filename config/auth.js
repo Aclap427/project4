@@ -11,9 +11,9 @@ module.exports = function (req, res, next) {
         jwt.verify(token, SECRET, function (err, decoded) {
             // Only add req.user if valid token
             if (!err) req.user = decoded.user;
-            return next();
+            next();
         });
     } else {
-        return next();
+        next();
     }
 };

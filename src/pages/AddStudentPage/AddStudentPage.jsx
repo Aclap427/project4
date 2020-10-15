@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import tokenService from '../../utils/tokenService';
+//import tokenService from '../../utils/tokenService';
 import './AddStudentPage.css'
 
 class AddStudentPage extends Component {
@@ -8,7 +8,7 @@ class AddStudentPage extends Component {
         formData: {
             name: '',
             grade: '',
-            user: tokenService.getUserFromToken(),
+            user: this.props.user._id
         }
     };
 
@@ -32,31 +32,28 @@ class AddStudentPage extends Component {
             <>
                 <br/>
                 <h1>Add a Student</h1>
-                <div className="addContainer">
-                <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Student's Name</label>
-                        <input
-                            className="form-control"
-                            name="name"
-                            value={this.state.formData.name}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Student's Grade</label>
-                        <input
-                            className="form-control"
-                            name="grade"
-                            value={this.state.formData.grade}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                        <button type="submit" className="button" disabled={this.state.invalidForm}><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
-                   
-                    </form>
+                    <div className="addContainer">
+                        <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
+                            <div>
+                                <label>Student's Name</label>
+                                    <input
+                                        name="name"
+                                        value={this.state.formData.name}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                            </div>
+                            <div>
+                                <label>Student's Grade</label>
+                                    <input
+                                        name="grade"
+                                        value={this.state.formData.grade}
+                                        onChange={this.handleChange}
+                                        required
+                                    />
+                            </div>
+                            <button type="submit" className="button" disabled={this.state.invalidForm}><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
+                        </form>
                     </div>
             </>
         );

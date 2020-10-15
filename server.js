@@ -4,7 +4,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cors = require('cors')
 
-
 const app = express();
 
 require('dotenv').config();

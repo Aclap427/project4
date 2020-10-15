@@ -1,4 +1,4 @@
-const { deleteOne } = require('../../models/student');
+//const { deleteOne } = require('../../models/student');
 const Student = require('../../models/student');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 };
 
 async function index(req, res) {
-    const students = await Student.find({});
+    const students = await Student.find({ user: req.user._id});
     res.status(200).json(students);
 }
 

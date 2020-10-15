@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 import './LoginPage.css';
 
@@ -35,20 +34,11 @@ class LoginPage extends Component {
                 <h2> Log In </h2>
                 <form onSubmit={this.handleSubmit} >
                     <div className="form-group">
-                        <div>
-                            <input type="email" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div>
-                            <input type="password" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="form-group">
-                            <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px"/></button>
+                        
+                        <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} /> <br/>
+                        <input type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} /> <br/>
+                        <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px"/></button>
                            
-                        </div>
                     </div>
                 </form>
             </div>

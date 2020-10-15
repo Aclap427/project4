@@ -15,8 +15,17 @@ function StudentListItem(Student, props) {
             
                 <Link to={{pathname: '/records',
                     state: { student: props.student }}}>
-                            RECORDS
+                        RECORDS
                 </Link>
+                <Link to={{
+                            pathname: '/edit',
+                            state: { student: props.student }
+                        }}
+                    >
+                        EDIT
+</Link>
+                <button onClick={() => props.handleDeleteStudent(props.student._id)}>
+                DELETE</button>
             
             </div>
             

@@ -3,11 +3,11 @@ let router = express.Router();
 let studentsCtrl = require('../../controllers/api/students');
 
 router.use(require('../../config/auth'));
-router.get('/', studentsCtrl.index);
+router.get('/', checkAuth, studentsCtrl.index);
 router.get('/:id', studentsCtrl.show);
-router.post('/', studentsCtrl.create);
-router.delete('/:id', checkAuth, studentsCtrl.delete);
-router.put('/:id', checkAuth, studentsCtrl.update);
+router.post('/', checkAuth, studentsCtrl.create);
+router.delete('/:id', studentsCtrl.delete);
+router.put('/:id', studentsCtrl.update);
 
 /*---------- Protected Routes ----------*/
 // Process the token for only the routes below
