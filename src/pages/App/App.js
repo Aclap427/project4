@@ -52,6 +52,16 @@ class App extends Component {
     console.log(newStudent)
   }
 
+  handleAddRecord = async newRecordData => {
+    const newRecord = await StudentsAPI.create(newRecordData);
+    this.setState(state => ({
+      record: [state.record, newRecord]
+    }),
+      // Using cb to wait for state to update before rerouting
+      () => this.props.history.push('/all'));
+    console.log(newRecord)
+  }
+
   /*--- Lifecycle Methods ---*/
 
 

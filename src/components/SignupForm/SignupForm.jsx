@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 import '../../pages/App/App.css';
 
@@ -60,7 +60,7 @@ class SignupForm extends Component {
                             <div className="form-group">
                                 <div className="form-group">
                                     <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px"/></button>
-                                    <button type="cancel" className="cancel"><Link to='/'><img src='https://i.imgur.com/xZb5UVV.jpg' alt="cancel" width="45px"/></Link></button>
+                                    
                                 </div>
                             </div >
                     </form>

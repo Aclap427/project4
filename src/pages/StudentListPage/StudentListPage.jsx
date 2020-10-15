@@ -8,7 +8,8 @@ function StudentListPage(props) {
     return (
         <>
             <h1>Students</h1>
-            <div className="StudentListPage-grid">
+            <div className="studentContainer">
+            
                 {props.students.map(student => (
                     <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id }
                  />

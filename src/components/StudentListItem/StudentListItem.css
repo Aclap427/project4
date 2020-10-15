@@ -4,12 +4,32 @@
 }
 
 .container {
-  background-color: purple;
-  height: 200px;
-  font-size: 40px;
-  color: yellow;
+  
+  height: 300px;
+  font-size: 20px;
+  color: white;
+  background-image: url('https://i.imgur.com/LTcI0PT.png?1');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 250px;
+  display:grid;
+  place-items: center;
+  
+}
+
+.center {
+  margin-top: 20px;
+}
+
+h2{
+  color: rgb(91, 216, 91);
+}
+
+p{
+  font-size: 10px;
 }
 
 a{
-  color:yellow;
+  color:white;
+  font-size: 15px;
 }

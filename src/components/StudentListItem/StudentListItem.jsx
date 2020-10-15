@@ -6,16 +6,18 @@ import './StudentListItem.css';
 function StudentListItem(Student, props) {
     return (
         <>
-        <div className='container'>
-            <div>
-                <h3>{Student.name}</h3>
-                <h4>{Student.grade}</h4>
-            </div>
-            <div>
+            <div className='container'>
+                <div className='center'>
+            
+                <h2>{Student.name}</h2>
+                <p> Grade: {Student.grade}</p>
+            
+            
                 <Link to={{pathname: '/records',
                     state: { student: props.student }}}>
-                    RECORDS
+                            RECORDS
                 </Link>
+            
             </div>
             
         </div></>
