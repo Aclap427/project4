@@ -1,11 +1,17 @@
 const BASE_URL = '/api/students';
 
-export function getAll() {
+module.exports = {
+    getAll,
+    create,
+    update,
+    deleteOne
+}
+function getAll() {
     return fetch(BASE_URL)
         .then(res => res.json());
 }
 
-export function create(student) {
+function create(student) {
     return fetch(BASE_URL, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -13,7 +19,7 @@ export function create(student) {
     }).then(res => res.json());
 }
 
-export function update(student) {
+function update(student) {
     return fetch(`${BASE_URL}/${student._id}`, {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
@@ -21,7 +27,7 @@ export function update(student) {
     }).then(res => res.json());
 }
 
-export function deleteOne(id) {
+function deleteOne(id) {
     return fetch(`${BASE_URL}/${id}`, {
         method: 'DELETE'
     }).then(res => res.json());

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Switch, /*redirect,*/ } from 'react-router-dom';
 import './App.css';
+import userService from '../../utils/userService';
+import * as StudentsAPI from '../../services/StudentsAPI';
+
+ //------------Pages---------------------------------------//
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import userService from '../../utils/userService';
+import StudentListPage from '../StudentListPage/StudentListPage';
+import AddStudentPage from '../AddStudentPage/AddStudentPage';
+
+//------------Components-----------------------------------//
 import NavBar from '../../components/NavBar/NavBar';
-import * as StudentsAPI from '../../services/StudentsAPI';
-import StudentPage from '../StudentPage/StudentPage';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Apple from '../../components/Apple/Apple';
@@ -16,17 +21,16 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: userService.getUser()
-    
-    };
+      user: userService.getUser(),
+      students: [],
+      };
   }
-  state = {
-    students: []
-  };
 
   async componentDidMount() {
     const studentsFromAPI = await StudentsAPI.getAll();
-    this.setState({ studentsFromAPI });
+      this.setState({
+        studentsFromAPI: studentsFromAPI,
+    });
   }
 
   /*--- Callback Methods ---*/
@@ -38,7 +42,19 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() })
   }
+
+  handleAddStudent = async newStudentData => {
+    const newStudent = await StudentsAPI.create(newStudentData);
+    this.setState(state => ({
+      student: [state.student, newStudent]
+    }),
+      // Using cb to wait for state to update before rerouting
+      () => this.props.history.push('/all'));
+    console.log(newStudent)
+  }
+
   /*--- Lifecycle Methods ---*/
+
 
   render() {
     return (
@@ -69,8 +85,14 @@ class App extends Component {
             />
           } />
             <main>
-              <Route exact path='/' render={() =>
-                <StudentPage
+            
+              <Route exact path='/add' render={() =>
+                <AddStudentPage
+                  handleAddStudent={this.handleAddStudent}
+                />
+              } />
+              <Route exact path='/all' render={() =>
+                <StudentListPage
                   students={this.state.students}
                 />
               } />
@@ -80,10 +102,9 @@ class App extends Component {
         
    
         <div><Footer /></div>
-      );
-    }
+      
   </>
-    );
+    )
       
   }
   
