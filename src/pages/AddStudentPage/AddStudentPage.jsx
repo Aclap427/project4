@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import tokenService from '../../utils/tokenService';
 
 class AddStudentPage extends Component {
     state = {
@@ -6,6 +7,7 @@ class AddStudentPage extends Component {
         formData: {
             name: '',
             grade: '',
+            //user: tokenService.getUserFromToken(),
         }
     };
 

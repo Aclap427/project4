@@ -4,12 +4,13 @@ import StudentListItem from "../../components/StudentListItem/StudentListItem";
 
 
 function StudentListPage(props) {
+    
     return (
         <>
             <h1>Students</h1>
             <div className="StudentListPage-grid">
                 {props.students.map(student => (
-                    <StudentListItem student={student} key={student._id}
+                    <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id }
                  />
                 ))}
             </div>
