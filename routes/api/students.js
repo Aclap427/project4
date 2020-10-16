@@ -6,8 +6,8 @@ router.use(require('../../config/auth'));
 router.get('/', studentsCtrl.index);
 router.get('/:id', studentsCtrl.show);
 router.post('/', studentsCtrl.create);
-router.delete('/:id', checkAuth, studentsCtrl.delete);
-router.put('/:id', checkAuth, studentsCtrl.update);
+router.delete('/:id', studentsCtrl.delete);
+router.put('/:id', studentsCtrl.update);
 
 /*---------- Protected Routes ----------*/
 // Process the token for only the routes below

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './EditStudentPage.css';
+
 
 class EditStudentPage extends Component {
     state = {
@@ -24,41 +26,31 @@ class EditStudentPage extends Component {
 
     render() {
         return (
-            <>
-                <h1>Edit Student</h1>
-                <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Name</label>
-                        <input
-                            className="form-control"
-                            name="name"
-                            value={this.state.formData.name}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Grade</label>
-                        <input
-                            className="form-control"
-                            name="grade"
-                            value={this.state.formData.grade}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                    
-
-                    <button
-                        type="submit"
-                        className="btn btn-xs"
-                        disabled={this.state.invalidForm}
-                    >
-                        Save Changes
-         </button>&nbsp;&nbsp;
-         <Link to='/'>CANCEL</Link>
-                </form>
-            </>
+            <div id="editContainer">
+                <h2>Edit Student</h2>
+                    <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
+                        <div>
+                            <label>Name</label>
+                                <input
+                                    name="name"
+                                    value={this.state.formData.name}
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                        </div>
+                        <div>
+                            <label>Grade</label>
+                                <input
+                                    name="grade"
+                                    value={this.state.formData.grade}
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                        </div>
+                            <button type="submit" disabled={this.state.invalidForm}><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" />
+                            </button>
+                    </form>
+            </div>
         );
     }
 }

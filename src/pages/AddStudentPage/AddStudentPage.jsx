@@ -31,7 +31,7 @@ class AddStudentPage extends Component {
         return (
             <>
                 <br/>
-                <h1>Add a Student</h1>
+                <h2>Add a Student</h2>
                 <div className="addContainer">
                 <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                     <div className="form-group">
