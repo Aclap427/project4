@@ -10,6 +10,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import StudentListPage from '../StudentListPage/StudentListPage';
 import AddStudentPage from '../AddStudentPage/AddStudentPage';
 import StudentRecordPage from '../StudentRecordPage/StudentRecordPage';
+import EditStudentPage from '../EditStudentPage/EditStudentPage';
 
 //------------Components-----------------------------------//
 import NavBar from '../../components/NavBar/NavBar';
@@ -24,7 +25,7 @@ class App extends Component {
     this.state = {
       user: userService.getUser(),
       students: [],
-      };
+    };
   }
 
   async componentDidMount() {
@@ -32,94 +33,101 @@ class App extends Component {
     this.setState({ students });
   }
 
-  /*--- Callback Methods ---*/
-  handleLogout = () => {
-    userService.logout();
-    this.setState({ user: null })
-  }
-
-  handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() })
-  }
-
   handleAddStudent = async newStudentData => {
     const newStudent = await StudentsAPI.create(newStudentData);
     this.setState(state => ({
-      student: [state.student, newStudent]
+      students: [...state.students, newStudent]
     }),
-      // Using cb to wait for state to update before rerouting
       () => this.props.history.push('/all'));
-    console.log(newStudent)
   }
 
-  handleAddRecord = async newRecordData => {
-    const newRecord = await StudentsAPI.create(newRecordData);
-    this.setState(state => ({
-      record: [state.record, newRecord]
-    }),
-      // Using cb to wait for state to update before rerouting
-      () => this.props.history.push('/all'));
-    console.log(newRecord)
+  handleDeleteStudent = async id => {
+    await StudentsAPI.deleteOne(id);
+    this.setState(
+      state => ({
+        // Yay, filter returns a NEW array
+        students: state.students.filter(s => s._id !== id),
+      }),
+      () => this.props.history.push("/all")
+    );
+  };
+
+  handleUpdateStudent = async updatedStudentData => {
+    const updatedStudent = await StudentsAPI.update(updatedStudentData);
+    // Using map to replace just the puppy that was updated
+    const newStudentsArray = this.state.students.map(s =>
+      s._id === updatedStudent._id ? updatedStudent : s
+    );
+    this.setState(
+      { students: newStudentsArray },
+      // This cb function runs after state is updated
+      () => this.props.history.push("/all")
+    );
+  };
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null, students:[]});
   }
 
-  /*--- Lifecycle Methods ---*/
-
+  handleSignupOrLogin = () => {
+    this.setState({ user: userService.getUser() });
+  }
 
   render() {
     return (
       <>
-      <div>
-        <Header/>
-      </div>
-      <div>
-        <NavBar
-          user={this.state.user}
-          handleLogout={this.handleLogout}
-        />
-        <Switch>
-          <Route exact path='/' render={() =>
-              <Apple />}
-            />
-          <Route exact path='/signup' render={({ history }) =>
-              <SignupPage history={history} handleSignupOrLogin={this.handleSignupOrLogin}
-              />}
-            />
-          <Route exact path='/login' render={({ history }) =>
-            <LoginPage history={history} handleSignupOrLogin={this.handleSignupOrLogin}
-              />}
-            />
-
-            
-              <Route
-                exact
-                path="/add"
-                render={({ history }) => <AddStudentPage history={history} handleAddStudent={this.handleAddStudent} />}
-              />
-              <Route exact path='/all' render={() =>
-                <StudentListPage students={this.state.students}
-                />}
-              />
-              <Route exact path='/records' render={({ location }) =>
-                <StudentRecordPage location={location} />
-              } />
-            
-        </Switch>
+       <div>
+          <Header/>
         </div>
+
+        <div>
+          <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
+        </div>
+
+        <Switch>
+
+          <Route exact path='/signup' render={({ history }) =>
+            <SignupPage history={history} handleSignupOrLogin={this.handleSignupOrLogin} />}
+          />
+
+          <Route exact path='/login' render={({ history }) =>
+            <LoginPage handleSignupOrLogin={this.handleSignupOrLogin} history={history} />}
+          />
+
+          <Route exact path='/' render={() => <Apple />}
+          />
+        
+          <Route exact path='/all' render={() => <StudentListPage students={this.state.students}
+            handleDeleteStudent={this.handleDeleteStudent} />}
+          />
+
+          <Route exact path='/add' render={() => <AddStudentPage handleAddStudent={this.handleAddStudent} />}
+          />
+
+          <Route exact path='/records' render={({ location }) => <StudentRecordPage location={location} />}
+          />
+
+          <Route exact path="/edit" render={({ location }) => (<EditStudentPage
+            handleUpdateStudent={this.handleUpdateStudent} location={location}/>)}
+          />
+          
+        </Switch>
+        <div>
+          <Footer />
+        </div>
+      </>
+     
+      
+    );
+  }
+}
+
         
    
-        <div><Footer /></div>
+     
       
-  </>
-    )
-      
-  }
+
   
-//   <Route exact path='/high-scores' render={() => (
-//   userService.getUser() ?
-//     <HighScoresPage />
-//     :
-//     <Redirect to='/login' />
-// )} />
-}
 
 export default App;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import tokenService from '../../utils/tokenService';
+import * as StudentsAPI from '../../services/StudentsAPI';
+import './StudentRecordPage.css';
 
 class StudentRecordPage extends Component {
     state = {
@@ -7,7 +9,7 @@ class StudentRecordPage extends Component {
         formData: {
             date: '',
             subjects: '',
-            readingLog: 'Book Title and pages read',
+            readingLog: 'Title and pages read',
             notes: '',
             user: tokenService.getUserFromToken(),
         }
@@ -15,6 +17,15 @@ class StudentRecordPage extends Component {
 
     formRef = React.createRef();
 
+
+    handleAddRecord = async newRecordData => {
+        const newRecord = await StudentsAPI.create(newRecordData);
+        this.setState(state => ({
+            records: [...state.records, newRecord]
+    }),
+      () => this.props.history.push('/all'));
+      }
+    
     handleSubmit = e => {
         e.preventDefault();
         this.props.handleAddRecord(this.state.formData);
@@ -32,57 +43,51 @@ class StudentRecordPage extends Component {
         return (
             <>
                 <h1> STUDENT RECORDS </h1>
-                <div className="recordContainer">
-                    <h3>Add a Record</h3>
-                <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Date</label>
-                        <input
-                            className="form-control"
-                            name="date"
-                            value={this.state.formData.date}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Subjects Studied</label>
-                        <input
-                            className="form-control"
-                            name="subjects"
-                            value={this.state.formData.subjects}
-                            onChange={this.handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Reading Log</label>
-                        <input
-                            className="form-control"
-                            name="readingLog"
-                            value={this.state.formData.readingLog}
-                            onChange={this.handleChange}
-                            required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Notes</label>
-                            <input
-                            className="form-control"
-                            name="notes"
-                            value={this.state.formData.notes}
-                            onChange={this.handleChange}
-                            
-                            />
-                        </div>
-                    <button
-                        type="submit"
-                        className="btn"
-                        disabled={this.state.invalidForm}
-                    >
-                        ADD RECORD
-         </button>
-                    </form>
+                    <div className="recordContainer">
+                        <h3>Add a Record</h3>
+                            <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
+                                <div>
+                                    <label>Date</label>
+                                        <input
+                                            className="form-control"
+                                            name="date"
+                                            value={this.state.formData.date}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                </div>
+                                <div>
+                                    <label>Subjects Studied</label>
+                                        <input
+                                            className="form-control"
+                                            name="subjects"
+                                            value={this.state.formData.subjects}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                </div>
+                                <div>
+                                    <label>Reading Log</label>
+                                        <input
+                                            className="form-control"
+                                            name="readingLog"
+                                            value={this.state.formData.readingLog}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                </div>
+                                <div>
+                                    <label>Notes</label>
+                                        <input
+                                            className="form-control"
+                                            name="notes"
+                                            value={this.state.formData.notes}
+                                            onChange={this.handleChange}
+                                        />
+                                </div>
+                                <button type="submit" disabled={this.state.invalidForm} ><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" />
+                                </button>
+                            </form>
                     </div>
             </>
         );
