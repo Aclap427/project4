@@ -46,8 +46,8 @@ class LoginPage extends Component {
                     </div>
                     <div className="form-group">
                         <div className="form-group">
-                            <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px"/></button>
-                           
+                            <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
+
                         </div>
                     </div>
                 </form>

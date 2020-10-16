@@ -8,11 +8,11 @@ function StudentListItem(props) {
             <div className="center">
                 <h2>{props.student.name}</h2>
                 <p>Grade: {props.student.grade}</p>
-                <Link to={{ pathname: '/records', state: { student: props.student }}}>
-                    -RECORDS- <br/>
+                <Link to={{ pathname: '/records', state: { student: props.student } }}>
+                    -RECORDS- <br />
                 </Link>
-                <Link to={{ pathname: '/edit', state: { student: props.student }}}>
-                    -EDIT STUDENT- <br/>
+                <Link to={{ pathname: '/edit', state: { student: props.student } }}>
+                    -EDIT STUDENT- <br />
                 </Link>
                 <button onClick={() => props.handleDeleteStudent(props.student._id)}>
                     -DELETE STUDENT-

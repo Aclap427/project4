@@ -7,12 +7,12 @@ function StudentListPage(props) {
         <>
             {StudentListPage}
             <div className="studentContainer">
-                    {props.students.map(student => (
-                        <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id}
-                            handleDeleteStudent={props.handleDeleteStudent}
-                        />
-                    ))}
-                </div>
+                {props.students.map(student => (
+                    <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id}
+                        handleDeleteStudent={props.handleDeleteStudent}
+                    />
+                ))}
+            </div>
         </>
     );
 }

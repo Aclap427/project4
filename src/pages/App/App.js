@@ -4,7 +4,7 @@ import './App.css';
 import userService from '../../utils/userService';
 import * as StudentsAPI from '../../services/StudentsAPI';
 
- //------------Pages---------------------------------------//
+//------------Pages---------------------------------------//
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import StudentListPage from '../StudentListPage/StudentListPage';
@@ -67,7 +67,7 @@ class App extends Component {
 
   handleLogout = () => {
     userService.logout();
-    this.setState({ user: null, students:[]});
+    this.setState({ user: null, students: [] });
   }
 
   handleSignupOrLogin = () => {
@@ -77,12 +77,12 @@ class App extends Component {
   render() {
     return (
       <>
-       <div>
-          <Header/>
+        <div>
+          <Header />
         </div>
 
         <div>
-          <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
+          <NavBar user={this.state.user} handleLogout={this.handleLogout} />
         </div>
 
         <Switch>
@@ -97,7 +97,7 @@ class App extends Component {
 
           <Route exact path='/' render={() => <Apple />}
           />
-        
+
           <Route exact path='/all' render={() => <StudentListPage students={this.state.students}
             handleDeleteStudent={this.handleDeleteStudent} />}
           />
@@ -109,25 +109,25 @@ class App extends Component {
           />
 
           <Route exact path="/edit" render={({ location }) => (<EditStudentPage
-            handleUpdateStudent={this.handleUpdateStudent} location={location}/>)}
+            handleUpdateStudent={this.handleUpdateStudent} location={location} />)}
           />
-          
+
         </Switch>
         <div>
           <Footer />
         </div>
       </>
-     
-      
+
+
     );
   }
 }
 
-        
-   
-     
-      
 
-  
+
+
+
+
+
 
 export default App;

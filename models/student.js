@@ -13,13 +13,13 @@ let recordSchema = new Schema({
 
 
 let studentSchema = new Schema({
-    name: { type: String, required: true},
-    grade: { type: String, default: null},
+    name: { type: String, required: true },
+    grade: { type: String, default: null },
     record: [recordSchema],
-    userID: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+    userID: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 },
     {
-    timestamps: true
-});
+        timestamps: true
+    });
 
 module.exports = mongoose.model('Student', studentSchema);
