@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, /*redirect,*/ } from 'react-router-dom';
+import { Route, Switch,  Redirect,} from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import * as StudentsAPI from '../../services/StudentsAPI';
@@ -38,7 +38,7 @@ class App extends Component {
     this.setState(state => ({
       students: [...state.students, newStudent]
     }),
-      () => this.props.history.push('/all'));
+      () => this.props.history.push('/'));
   }
 
   handleDeleteStudent = async id => {
@@ -98,18 +98,20 @@ class App extends Component {
           <Route exact path='/' render={() => <Apple />}
           />
 
-          <Route exact path='/all' render={() => <StudentListPage students={this.state.students}
-            handleDeleteStudent={this.handleDeleteStudent} />}
+          <Route exact path='/all' render={() => (userService.getUser() ? <StudentListPage user={this.state.user} students={this.state.students}
+            handleDeleteStudent={this.handleDeleteStudent} /> : <Redirect to='/login'/>)}
           />
 
-          <Route exact path='/add' render={() => <AddStudentPage handleAddStudent={this.handleAddStudent} />}
+          <Route exact path='/add' render={() => (userService.getUser() ? <AddStudentPage handleAddStudent={this.handleAddStudent} /> :
+          <Redirect to='/login'/>)}
           />
 
-          <Route exact path='/records' render={({ location }) => <StudentRecordPage location={location} />}
+          <Route exact path='/records' render={({ location }) => (userService.getUser() ? <StudentRecordPage user={this.state.user} location={location} /> :
+          <Redirect to='/login'/>)}
           />
 
-          <Route exact path="/edit" render={({ location }) => (<EditStudentPage
-            handleUpdateStudent={this.handleUpdateStudent} location={location} />)}
+          <Route exact path="/edit" render={({ location }) => (userService.getUser() ? <EditStudentPage user={this.state.user}
+            handleUpdateStudent={this.handleUpdateStudent} location={location} /> : <Redirect to='/login'/>)}
           />
 
         </Switch>

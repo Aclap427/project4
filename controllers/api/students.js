@@ -6,7 +6,7 @@ module.exports = {
     show,
     create,
     delete: deleteOneStudent,
-    update
+    update,
 };
 
 async function index(req, res) {
@@ -14,9 +14,10 @@ async function index(req, res) {
     res.status(200).json(students);
 }
 
-async function show(req, res) {
-    const student = await Student.findById(req.params.id);
-    res.status(200).json(student);
+function show(req, res) {
+    Student.findById(req.params.id, function (err, record) {
+        res.render('/records', { title: 'Records', record });
+    })
 }
 
 async function create(req, res) {

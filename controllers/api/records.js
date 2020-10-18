@@ -3,7 +3,7 @@ const Student = require('../models/student');
 
 
 module.exports = {
-    addRecord,
+    create: createRecord,
     delete: deleteRecord,
 };
 
@@ -12,16 +12,17 @@ function deleteRecord(req, res) {
         const recordSubdoc = student.records.id(req.params.id);
         recordSubdoc.remove();
         student.save(function (err) {
-            res.redirect(`/students/${student._id}`);
+            res.redirect('/records');
         })
     })
 }
 
-function addRecord(req, res) {
-    student.findById(req.params.id, function (err, student) {
+function createRecord(req, res) {
+    Student.findById(req.params.id, function (err, student) {
+        req.body.student = req.user._id;
         student.records.push(req.body);
         student.save(function (err) {
-            res.redirect(`/students/${req.params.id}`)
+            res.redirect('/records')
         });
     });
 }

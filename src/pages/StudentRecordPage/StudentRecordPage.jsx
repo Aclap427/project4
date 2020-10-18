@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import tokenService from '../../utils/tokenService';
 import * as StudentsAPI from '../../services/StudentsAPI';
 import './StudentRecordPage.css';
+import RecordCard from '../../components/RecordCard/RecordCard';
 
 class StudentRecordPage extends Component {
     state = {
@@ -39,17 +40,19 @@ class StudentRecordPage extends Component {
         });
     };
 
+    
+
     render() {
         return (
             <>
-                <h2> STUDENT RECORDS </h2>
+                <h2> STUDENT RECORDS</h2>
                 <div className="recordContainer">
                     <h3>Add a Record</h3>
                     <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                         <div>
                             <label>Date</label>
                             <input
-                                className="form-control"
+                                
                                 name="date"
                                 value={this.state.formData.date}
                                 onChange={this.handleChange}
@@ -59,7 +62,7 @@ class StudentRecordPage extends Component {
                         <div>
                             <label>Subjects Studied</label>
                             <input
-                                className="form-control"
+                                
                                 name="subjects"
                                 value={this.state.formData.subjects}
                                 onChange={this.handleChange}
@@ -69,7 +72,7 @@ class StudentRecordPage extends Component {
                         <div>
                             <label>Reading Log</label>
                             <input
-                                className="form-control"
+                                
                                 name="readingLog"
                                 value={this.state.formData.readingLog}
                                 onChange={this.handleChange}
@@ -79,7 +82,7 @@ class StudentRecordPage extends Component {
                         <div>
                             <label>Notes</label>
                             <input
-                                className="form-control"
+                                
                                 name="notes"
                                 value={this.state.formData.notes}
                                 onChange={this.handleChange}
@@ -89,6 +92,22 @@ class StudentRecordPage extends Component {
                         </button>
                     </form>
                 </div>
+                <div>
+                    <RecordCard></RecordCard>
+                </div>
+           
+                 
+ );
+
+               
+
+
+                
+
+             
+                    
+                    
+                    
             </>
         );
     }
