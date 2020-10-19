@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-//import tokenService from '../../utils/tokenService';
+import './AddStudentPage.css';
+
 
 class AddStudentPage extends Component {
     state = {
@@ -31,11 +32,11 @@ class AddStudentPage extends Component {
             <>
 
                 <br />
-                <h2>Add a Student</h2>
+                <h2>Add a Record</h2>
                 <div className="addContainer">
                     <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label>Student's Name</label>
+                            <label>Student's Name:</label>
                             <input
                                 className="form-control"
                                 name="name"
@@ -45,11 +46,51 @@ class AddStudentPage extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Student's Grade</label>
+                            <label>Student's Grade:</label>
                             <input
                                 className="form-control"
                                 name="grade"
                                 value={this.state.formData.grade}
+                                onChange={this.handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Date:</label>
+                            <input
+                                className="form-control"
+                                name="date"
+                                value={this.state.formData.date}
+                                onChange={this.handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Subjects Studied:</label>
+                            <input
+                                className="form-control"
+                                name="subjects"
+                                value={this.state.formData.subjects}
+                                onChange={this.handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Reading Log:</label>
+                            <input
+                                className="form-control"
+                                name="readingLog"
+                                value={this.state.formData.readingLog}
+                                onChange={this.handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Notes:</label>
+                            <input
+                                className="form-control"
+                                name="notes"
+                                value={this.state.formData.notes}
                                 onChange={this.handleChange}
                                 required
                             />

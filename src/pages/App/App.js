@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch,  Redirect,} from 'react-router-dom';
+import { Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import * as StudentsAPI from '../../services/StudentsAPI';
@@ -10,6 +10,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import StudentListPage from '../StudentListPage/StudentListPage';
 import AddStudentPage from '../AddStudentPage/AddStudentPage';
 import StudentRecordPage from '../StudentRecordPage/StudentRecordPage';
+import EditStudentPage from '../EditStudentPage/EditStudentPage';
 
 //------------Components-----------------------------------//
 import NavBar from '../../components/NavBar/NavBar';
@@ -93,6 +94,9 @@ class App extends Component {
                         <Route exact path='/records' render={({ location }) =>
                             <StudentRecordPage location={location} />
                         } />
+                        <Route exact path="/edit" render={({ location }) => (userService.getUser() ? <EditStudentPage user={this.state.user}
+                            handleUpdateStudent={this.handleUpdateStudent} location={location} /> : <Redirect to='/login' />)}
+                        />
 
                     </Switch>
                 </div>

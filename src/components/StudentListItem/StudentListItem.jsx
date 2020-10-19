@@ -13,15 +13,17 @@ function StudentListItem(props) {
             <div className="center">
                 <h2>{props.student.name}</h2>
                 <p>Grade: {props.student.grade}</p>
-                <Link to={{ pathname: '/records', state: { student: props.student } }}>
-                    -RECORDS- <br />
-                </Link>
+                <p>Date: {props.student.date}</p>
+                <p>Subjects: {props.student.subjects}</p>
+                <p>Reading Log: {props.student.readingLog}</p>
+                <p>Notes: {props.student.notes}</p>
+               
                 <Link to={{ pathname: '/edit', state: { student: props.student } }}>
                     -EDIT STUDENT- <br />
                 </Link>
                 <button onClick={handleDeleteStudent}>
                     -DELETE STUDENT-
-                </button>
+                </button><br/>
             </div>
         </div>
     );

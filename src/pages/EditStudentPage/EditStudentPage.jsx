@@ -23,13 +23,14 @@ class EditStudentPage extends Component {
         });
     };
 
+
     render() {
         return (
             <div id="editContainer">
                 <h2>Edit Student</h2>
                 <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                     <div>
-                        <label>Name</label>
+                        <label>Name:</label>
                         <input
                             name="name"
                             value={this.state.formData.name}
@@ -38,10 +39,43 @@ class EditStudentPage extends Component {
                         />
                     </div>
                     <div>
-                        <label>Grade</label>
+                        <label>Grade:</label>
                         <input
                             name="grade"
                             value={this.state.formData.grade}
+                            onChange={this.handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Date:</label>
+                        <input
+                            name="date"
+                            value={this.state.formData.date}
+                            onChange={this.handleChange}
+                            required
+                        />
+                    </div> <div>
+                        <label>Subjects:</label>
+                        <input
+                            name="subjects"
+                            value={this.state.formData.subjects}
+                            onChange={this.handleChange}
+                            required
+                        />
+                    </div> <div>
+                        <label>Reading Log:</label>
+                        <input
+                            name="readingLog"
+                            value={this.state.formData.readingLog}
+                            onChange={this.handleChange}
+                            required
+                        />
+                    </div> <div>
+                        <label>Notes:</label>
+                        <input
+                            name="notes"
+                            value={this.state.formData.notes}
                             onChange={this.handleChange}
                             required
                         />

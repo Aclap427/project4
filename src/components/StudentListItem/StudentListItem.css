@@ -1,15 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;700&display=swap');
+
 .Student-action-panel {
   display: flex;
   justify-content: space-around;
 }
 
 .container {
-  background-color: purple;
-  height: 200px;
-  font-size: 40px;
-  color: yellow;
+  
+  width: 250px;
+  display:grid;
+  place-items: center;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: rgb(226, 223, 223);
+  border-radius: 4px;
+}
+
+.center {
+  margin-top: 20px;
+}
+
+h2{
+  color: rgb(91, 216, 91);
+}
+
+p{
+  font-size: 20px;
+  color:black;
 }
 
 a{
-  color:yellow;
+  color:black;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color:black;
+  font-family: 'Josefin Sans', sans-serif;
+
 }

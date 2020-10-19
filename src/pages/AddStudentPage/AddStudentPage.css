@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;700&display=swap');
+
+.addContainer {
+    margin: 20px;
+    padding:20px;
+    font-family: 'Josefin Sans', sans-serif;
+
+}
+h1{
+    color: rgb(241, 82, 82);
+    font-family: 'Josefin Sans', sans-serif;
+    
+}
+
+.button {
+    width: 10%;
+    padding: 5px;
+    margin-left:45%;
+    margin-right:45%;
+    margin-top:10px;
+    margin-bottom: 10px;
+    background: transparent;
+    border: none;
+}
+
+input {
+    font-family: 'Josefin Sans', sans-serif;
+
+}
