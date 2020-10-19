@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import tokenService from '../../utils/tokenService';
-import './AddStudentPage.css'
+//import tokenService from '../../utils/tokenService';
 
 class AddStudentPage extends Component {
     state = {
@@ -8,7 +7,7 @@ class AddStudentPage extends Component {
         formData: {
             name: '',
             grade: '',
-            user: tokenService.getUserFromToken(),
+            //user: tokenService.getUserFromToken(),
         }
     };
 
@@ -30,9 +29,7 @@ class AddStudentPage extends Component {
     render() {
         return (
             <>
-                <br/>
-                <h2>Add a Student</h2>
-                <div className="addContainer">
+                <h1>Add a Student</h1>
                 <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>Student's Name</label>
@@ -54,10 +51,15 @@ class AddStudentPage extends Component {
                             required
                         />
                     </div>
-                        <button type="submit" className="button" disabled={this.state.invalidForm}><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
-                   
-                    </form>
-                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn"
+                        disabled={this.state.invalidForm}
+                    >
+                        ADD STUDENT
+         </button>
+                </form>
             </>
         );
     }

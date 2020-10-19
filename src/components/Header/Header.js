@@ -9,7 +9,7 @@ function Header() {
             <div className="header">
                 <h1>Homeschool RecordKeeper</h1>
                 <p>A simple answer to recording daily lessons</p>
-            <br/><br/>
+                <br /><br />
             </div>
         </>
     );

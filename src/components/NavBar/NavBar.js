@@ -6,7 +6,7 @@ import './NavBar.css';
 const NavBar = (props) => {
     let nav = props.user ?
         <div>
-            
+
             <span className='NavBar-welcome'>WELCOME, {props.user.name}</span>
             {props.user && <Link to='/all' className='NavBar-link' onClick={props.handleAllStudents}>VIEW ALL</Link>}
             {props.user && <Link to='/add' className='NavBar-link' onClick={props.handleAddStudent}>ADD STUDENT</Link>}
@@ -19,7 +19,7 @@ const NavBar = (props) => {
             <Link to='/' className='NavBar-link'>HOME</Link>
         </div>
         ;
-    
+
 
     return (
         <div className='NavBar'>

@@ -46,4 +46,3 @@ function login(creds) {
         })
         .then(({ token }) => tokenService.setToken(token));
 }
-

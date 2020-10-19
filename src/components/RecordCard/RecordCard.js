@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function RecordCard({ record }) {
     return (
         <div className='panel panel-default'>
-        
+
             <div className='panel-body'>
                 <dl>
                     <dt>Date</dt>
