@@ -12,8 +12,10 @@ function index() {
     const options = {
         method: 'GET',
         headers: {
+            'Content-type': 'application/json',
+            // Add this header - don't forget the space after Bearer
             'Authorization': 'Bearer ' + tokenService.getToken()
-        }
+        },
     };
     return fetch(BASE_URL, options).then(res => res.json());
 }
@@ -36,7 +38,8 @@ function update(student) {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json',
-            'Authorization': 'Bearer' + tokenService.getToken()
+            // Add this header - don't forget the space after Bearer
+            'Authorization': 'Bearer ' + tokenService.getToken()
         },
         body: JSON.stringify(student)
     }).then(res => res.json());
@@ -47,7 +50,8 @@ function deleteOne(student) {
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json',
-            'Authorization': 'Bearer' + tokenService.getToken()
-        }
+            // Add this header - don't forget the space after Bearer
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
     }).then(res => res.json());
 }

@@ -2,9 +2,11 @@ const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
+
 module.exports = {
     signup,
-    login
+    login,
+    addRecord
 };
 
 async function signup(req, res) {
@@ -46,3 +48,11 @@ function createJWT(user) {
         { expiresIn: '24h' }
     );
 }
+
+function addRecord(req, res, next) {
+    req.user.records.push(req.body);
+    req.user.save(function (err) {
+        res.redirect('/records');
+    });
+}
+
