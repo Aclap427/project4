@@ -6,7 +6,6 @@ const SECRET = process.env.SECRET;
 module.exports = {
     signup,
     login,
-    addRecord
 };
 
 async function signup(req, res) {
@@ -47,12 +46,5 @@ function createJWT(user) {
         SECRET,
         { expiresIn: '24h' }
     );
-}
-
-function addRecord(req, res, next) {
-    req.user.records.push(req.body);
-    req.user.save(function (err) {
-        res.redirect('/records');
-    });
 }
 

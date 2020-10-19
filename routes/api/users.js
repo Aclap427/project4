@@ -9,8 +9,6 @@ router.post('/login', usersCtrl.login);
 
 /*---------- Protected Routes ----------*/
 
-router.post('/records', usersCtrl.addRecord)
-
 
 
 module.exports = router;

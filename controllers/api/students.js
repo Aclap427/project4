@@ -1,4 +1,3 @@
-const { deleteOne } = require('../../models/student');
 const Student = require('../../models/student');
 
 module.exports = {
@@ -15,8 +14,8 @@ async function index(req, res) {
 }
 
 function show(req, res) {
-    Student.findById(req.params.id, function (err, record) {
-        res.render('/records', { title: 'Records', record });
+    Student.findById(req.params.id, function (err, student) {
+        res.render('/students', { title: 'Student', student });
     })
 }
 

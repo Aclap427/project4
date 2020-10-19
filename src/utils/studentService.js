@@ -1,14 +1,13 @@
 import tokenService from './tokenService';
-const BASE_URL = '/api/students/';
+const BASE_URL = '/api/students';
 
-export default {
-    index,
-    create,
-    update,
-    delete: deleteOne
-};
 
-function index() {
+export function getAll() {
+    return fetch(BASE_URL)
+        .then(res => res.json());
+}
+
+export function index() {
     const options = {
         method: 'GET',
         headers: {
@@ -20,20 +19,15 @@ function index() {
     return fetch(BASE_URL, options).then(res => res.json());
 }
 
-function create(student) {
-    const options = {
+export function create(student) {
+    return fetch(BASE_URL, {
         method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            // Add this header - don't forget the space after Bearer
-            'Authorization': 'Bearer ' + tokenService.getToken()
-        },
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify(student)
-    };
-    return fetch(BASE_URL, options).then(res => res.json());
+    }).then(res => res.json());
 }
 
-function update(student) {
+export function update(student) {
     return fetch(`${BASE_URL}/${student._id}`, {
         method: 'PUT',
         headers: {
@@ -45,7 +39,7 @@ function update(student) {
     }).then(res => res.json());
 }
 
-function deleteOne(student) {
+export function deleteOne(student) {
     return fetch(`${BASE_URL}/${student._id}`, {
         method: 'DELETE',
         headers: {

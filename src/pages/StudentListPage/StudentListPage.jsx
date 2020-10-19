@@ -13,18 +13,16 @@ function StudentListPage(props) {
     }, [change])
 
     return (
-        <> 
+        <>
             <div className="studentContainer">
                 {students.map(student => (
-                        <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id}
-                            change={change} setChange={setChange}
-                            handleDeleteStudent={props.handleDeleteStudent}
+                    <StudentListItem student={student} name={student.name} grade={student.grade} key={student._id}
+                        change={change} setChange={setChange}
+                        handleDeleteStudent={props.handleDeleteStudent}
                     />
                 ))}
             </div>
         </>
     );
 }
-
-
 export default StudentListPage;

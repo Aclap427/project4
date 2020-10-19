@@ -14,16 +14,16 @@ function StudentListItem(props) {
                 <h2>{props.student.name}</h2>
                 <p>Grade: {props.student.grade}</p>
                 <p>Date: {props.student.date}</p>
-                <p>Subjects: {props.student.subjects}</p>
-                <p>Reading Log: {props.student.readingLog}</p>
-                <p>Notes: {props.student.notes}</p>
                
+                <Link to={{ pathname: '/details', state: { student: props.student } }}>
+                    -DETAILS- <br />
+                </Link><br/>
                 <Link to={{ pathname: '/edit', state: { student: props.student } }}>
                     -EDIT STUDENT- <br />
                 </Link>
                 <button onClick={handleDeleteStudent}>
                     -DELETE STUDENT-
-                </button><br/>
+                </button><br />
             </div>
         </div>
     );

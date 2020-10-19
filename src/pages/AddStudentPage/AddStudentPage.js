@@ -42,7 +42,7 @@ class AddStudentPage extends Component {
                                 name="name"
                                 value={this.state.formData.name}
                                 onChange={this.handleChange}
-                         required
+                                required
                             />
                         </div>
                         <div className="form-group">
