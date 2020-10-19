@@ -54,6 +54,30 @@ class App extends Component {
         console.log(newStudent)
     }
 
+    handleUpdateStudent = async updatedStudentData => {
+        const updatedStudent = await StudentsAPI.update(updatedStudentData);
+        // Using map to replace just the puppy that was updated
+        const newStudentsArray = this.state.students.map(s =>
+            s._id === updatedStudent._id ? updatedStudent : s
+        );
+        this.setState(
+            { students: newStudentsArray },
+            // This cb function runs after state is updated
+            () => this.props.history.push("/all")
+        );
+    };
+
+    handleDeleteStudent = async id => {
+        await StudentsAPI.deleteOne(id);
+        this.setState(
+            state => ({
+                // Yay, filter returns a NEW array
+                students: state.students.filter(s => s._id !== id),
+            }),
+            () => this.props.history.push("/all")
+        );
+    };
+
     /*--- Lifecycle Methods ---*/
 
 
@@ -91,9 +115,7 @@ class App extends Component {
                             <StudentListPage students={this.state.students}
                             />}
                         />
-                        <Route exact path='/records' render={({ location }) =>
-                            <StudentRecordPage location={location} />
-                        } />
+                        
                         <Route exact path="/edit" render={({ location }) => (userService.getUser() ? <EditStudentPage user={this.state.user}
                             handleUpdateStudent={this.handleUpdateStudent} location={location} /> : <Redirect to='/login' />)}
                         />
