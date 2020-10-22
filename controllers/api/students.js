@@ -2,7 +2,7 @@ const Student = require('../../models/student');
 
 module.exports = {
     index,
-    //show,
+    show,
     create,
     delete: deleteOne,
     update,
@@ -14,15 +14,15 @@ async function index(req, res) {
     res.status(200).json(student);
 }
 
-// async function show(req, res) {
-//     try {
-//         req.body.user = req.user._id
-//         const student = await Student.findById(req.params.id);
-//         res.status(200).json(student);
-//     } catch (err) {
-//         res.json({ err });
-//     }
-// }
+async function show(req, res) {
+    try {
+        req.body.user = req.user._id
+        const student = await Student.findById(req.params.id);
+        res.status(200).json(student);
+    } catch (err) {
+        res.json({ err });
+    }
+}
 
 async function create(req, res) {
     console.log(req.user)

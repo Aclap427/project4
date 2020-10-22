@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './StudentCard.css';
 
 function StudentCard({ student }) {
     return (
-        <div>
+        <div id="allInfo">
             <div>
-                <h3 >{student.name} &nbsp; &nbsp; {student.grade}</h3>
+                <h3 >{student.name} &nbsp; &nbsp; Grade: {student.grade}</h3>
             </div>
-            <div>
+            <div id="recInfo">
                 <dl>
                     <dt>Date:</dt>
                     <dd>{student.date}</dd>
