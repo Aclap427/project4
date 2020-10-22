@@ -9,11 +9,14 @@ module.exports = function (req, res, next) {
         token = token.replace('Bearer ', '');
         // Check if token is valid and not expired
         jwt.verify(token, SECRET, function (err, decoded) {
-            // Only add req.user if valid token
-            if (!err) req.user = decoded.user;
-            return next();
+            if (err) {
+                return next(err);
+            } else {
+                req.user = decoded.user;
+                return next();
+            }
         });
     } else {
-        return next();
+    next();
     }
 };

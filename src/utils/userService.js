@@ -1,14 +1,6 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
-export default {
-    signup,
-    getUser,
-    logout,
-    login
-};
-
-
 function signup(user) {
     return fetch(BASE_URL + 'signup', {
         method: 'POST',
@@ -22,8 +14,6 @@ function signup(user) {
         })
         // Parameter destructuring!
         .then(({ token }) => tokenService.setToken(token));
-    // the above could have been written as
-    //.then((token) => token.token);
 }
 
 function getUser() {
@@ -46,3 +36,11 @@ function login(creds) {
         })
         .then(({ token }) => tokenService.setToken(token));
 }
+
+
+export default {
+    signup,
+    getUser,
+    logout,
+    login
+};

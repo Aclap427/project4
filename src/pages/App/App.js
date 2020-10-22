@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
+import studentService from '../../utils/studentService';
 import * as StudentsAPI from '../../services/StudentsAPI';
 
 //------------Pages---------------------------------------//
@@ -24,34 +25,39 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            user: userService.getUser(),
             students: [],
+            user: userService.getUser(),
+            
         };
     }
 
-    async componentDidMount() {
+  
+
+    componentDidMount = async () => {
         const students = await StudentsAPI.getAll();
         this.setState({ students });
     }
 
+   
     /*--- Callback Methods ---*/
     handleLogout = () => {
         userService.logout();
-        this.setState({ user: null })
+        this.setState({ user: null, students: [] });
     }
 
-    handleSignupOrLogin = () => {
-        this.setState({ user: userService.getUser() })
-    }
+    handleSignupOrLogin = async () => {
+        this.setState({
+            user: userService.getUser(),
+            students: await studentService.getAll()
+        });
+    };
 
-    handleAddStudent = async newStudentData => {
+    handleAddStudent = async (newStudentData) => {
         const newStudent = await StudentsAPI.create(newStudentData);
-        this.setState(state => ({
-            student: [state.student, newStudent]
+        this.setState((state) => ({
+            students: [...state.students, newStudent]
         }),
-            // Using cb to wait for state to update before rerouting
             () => this.props.history.push('/all'));
-        console.log(newStudent)
     }
 
     handleUpdateStudent = async updatedStudentData => {
@@ -71,7 +77,6 @@ class App extends Component {
         await StudentsAPI.deleteOne(id);
         this.setState(
             state => ({
-                // Yay, filter returns a NEW array
                 students: state.students.filter(s => s._id !== id),
             }),
             () => this.props.history.push("/all")
@@ -109,11 +114,14 @@ class App extends Component {
                         <Route
                             exact
                             path="/add"
-                            render={({ history }) => <AddStudentPage history={history} handleAddStudent={this.handleAddStudent} />}
+                            render={() => userService.getUser() ? <AddStudentPage user={this.state.user} handleAddStudent={this.handleAddStudent} />
+                        : <Redirect to='/login'/>}
                         />
-                        <Route exact path='/all' render={() =>
-                            <StudentListPage students={this.state.students}
-                            />}
+
+                        <Route exact path='/all' render={() => userService.getUser() ? 
+                            <StudentListPage students={this.state.students} handleDeleteStudent={this.handleDeleteStudent}
+                            /> :
+                        <Redirect to='/login'/>}
                         />
 
                         <Route exact path="/edit" render={({ location }) => (userService.getUser() ? <EditStudentPage user={this.state.user}

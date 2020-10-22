@@ -2,10 +2,10 @@ let express = require('express');
 let router = express.Router();
 let studentsCtrl = require('../../controllers/api/students');
 
-
-router.get('/', studentsCtrl.index);
+router.use(require('../../config/auth'));
+router.get('/', checkAuth, studentsCtrl.index);
 router.get('/:id', studentsCtrl.show);
-router.post('/', studentsCtrl.create);
+router.post('/', checkAuth, studentsCtrl.create);
 router.delete('/:id', studentsCtrl.delete);
 router.put('/:id', studentsCtrl.update);
 

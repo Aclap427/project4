@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './AddStudentPage.css';
+import tokenService from '../../utils/tokenService'
 
 
 class AddStudentPage extends Component {
@@ -8,7 +9,12 @@ class AddStudentPage extends Component {
         formData: {
             name: '',
             grade: '',
-            //user: tokenService.getUserFromToken(),
+            date: '',
+            subjects: '',
+            readingLog: '',
+            notes: '',
+            user: tokenService.getUserFromToken(),
+            
         }
     };
 

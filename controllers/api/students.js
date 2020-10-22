@@ -9,18 +9,23 @@ module.exports = {
 };
 
 async function index(req, res) {
-    const students = await Student.find({});
+    const students = await Student.find({ user: req.user._id });
     res.status(200).json(students);
 }
 
-function show(req, res) {
-    Student.findById(req.params.id, function (err, student) {
-        res.render('/students', { title: 'Student', student });
-    })
+async function show(req, res) {
+    try {
+        req.body.user = req.user
+        const student = await Student.findById(req.params.id);
+        res.status(200).json(student);
+    } catch (err) {
+        res.json({ err });
+    }
 }
 
 async function create(req, res) {
-    const student = await Student.create(req.body);
+    req.body.createdBy = req.user._id
+    const student = await Student.create( req.body );
     res.status(201).json(student);
 }
 
