@@ -7,9 +7,9 @@ const NavBar = (props) => {
     let nav = props.user ?
         <div>
 
-            <span className='NavBar-welcome'>WELCOME, {props.user.name}</span>
-            {props.user && <Link to='/all' className='NavBar-link' onClick={props.handleAllStudents}>VIEW ALL</Link>}
-            {props.user && <Link to='/add' className='NavBar-link' onClick={props.handleAddStudent}>ADD RECORD</Link>}
+            <span>WELCOME, {props.user.name}</span>
+            <Link to='/details' className='NavBar-link' onClick={props.handleAllStudents}>VIEW ALL</Link>
+            <Link to='/add' className='NavBar-link' onClick={props.handleAddStudent}>ADD RECORD</Link>
             <Link to='' className='NavBar-link' onClick={props.handleLogout}>LOG OUT</Link>
         </div>
         :

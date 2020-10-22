@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './AddStudentPage.css';
-import tokenService from '../../utils/tokenService'
 
 
 class AddStudentPage extends Component {
@@ -13,7 +12,6 @@ class AddStudentPage extends Component {
             subjects: '',
             readingLog: '',
             notes: '',
-            user: tokenService.getUserFromToken(),
             
         }
     };
@@ -41,60 +39,54 @@ class AddStudentPage extends Component {
                 <h2>Add a Record</h2>
                 <div className="addContainer">
                     <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-                        <div className="form-group">
+                        <div>
                             <label>Student's Name:</label>
                             <input
-                                className="form-control"
                                 name="name"
                                 value={this.state.formData.name}
                                 onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        <div >
                             <label>Student's Grade:</label>
                             <input
-                                className="form-control"
                                 name="grade"
                                 value={this.state.formData.grade}
                                 onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <label>Date:</label>
                             <input
-                                className="form-control"
                                 name="date"
                                 value={this.state.formData.date}
                                 onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <label>Subjects Studied:</label>
                             <input
-                                className="form-control"
                                 name="subjects"
                                 value={this.state.formData.subjects}
                                 onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <label>Reading Log:</label>
                             <input
-                                className="form-control"
                                 name="readingLog"
                                 value={this.state.formData.readingLog}
                                 onChange={this.handleChange}
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <label>Notes:</label>
                             <input
-                                className="form-control"
                                 name="notes"
                                 value={this.state.formData.notes}
                                 onChange={this.handleChange}

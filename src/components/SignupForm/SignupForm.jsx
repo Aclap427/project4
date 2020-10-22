@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-import '../../pages/App/App.css';
+
 
 
 class SignupForm extends Component {
@@ -16,7 +15,6 @@ class SignupForm extends Component {
     handleChange = (e) => {
         this.props.updateMessage('');
         this.setState({
-            // Using ES2015 Computed Property Names
             [e.target.name]: e.target.value
         });
     }
@@ -25,11 +23,9 @@ class SignupForm extends Component {
         e.preventDefault();
         try {
             await userService.signup(this.state);
-            // Successfully signed up - show Page
             this.props.handleSignupOrLogin();
             this.props.history.push('/');
         } catch (err) {
-            // Invalid user data (probably duplicate email)
             this.props.updateMessage(err.message);
         }
     }

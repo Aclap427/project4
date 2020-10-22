@@ -1,60 +1,66 @@
-import React, { Component } from 'react';
-import userService from '../../utils/userService';
-import './LoginPage.css';
+
+import React, { Component } from "react";
+import userService from "../../utils/userService";
 
 class LoginPage extends Component {
-
     state = {
-        email: '',
-        pw: ''
+        invalidForm: true,
+        formData: {
+            email: "",
+            password: "",
+        },
     };
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
+    formRef = React.createRef();
 
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await userService.login(this.state);
-            // Successfully logged up - show GamePage
+            await userService.login(this.state.formData);
+
             this.props.handleSignupOrLogin();
-            this.props.history.push('/');
+            this.props.history.push("/");
         } catch (err) {
-            // Invalid user data (probably duplicate email)
-            alert('Invalid credentials');
+            this.updateMessage(err.message);
         }
+    };
+
+    handleChange = (e) => {
+        const formData = {
+            ...this.state.formData,
+            [e.target.name]: e.target.value,
+        };
+        this.setState({
+            formData,
+            invalidForm: !this.formRef.current.checkValidity(),
+        });
+    };
+
+    updateMessage = (msg) => {
+        this.setState({ message: msg });
     }
 
     render() {
         return (
-            <div className="Container">
-                <h2> Log In </h2>
-                <form onSubmit={this.handleSubmit} >
-                    <div className="form-group">
-                        <div>
-                            <input type="email" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                        </div>
+            <>
+                
+                <h2>Log In</h2>
+            
+                <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
+                    <div >
+                        <label>Your email (required)</label>
+                        <input  name="email" required
+                            value={this.state.formData.email} onChange={this.handleChange} />
                     </div>
-                    <div className="form-group">
-                        <div>
-                            <input type="password" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-                        </div>
+                    <div >
+                        <label>Your password</label>
+                        <input type="password" name="password"
+                            value={this.state.formData.password} onChange={this.handleChange} />
                     </div>
-                    <div className="form-group">
-                        <div className="form-group">
-                            <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
-
-                         
-
-                        </div>
-                    </div>
+                    <button type="submit"  disabled={this.state.invalidForm}>LOG IN</button>
                 </form>
-            </div>
+            </>
         );
     }
 }
-
 export default LoginPage;

@@ -1,48 +1,68 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import studentService from '../../utils/studentService';
-import * as StudentsAPI from '../../services/StudentsAPI';
 
 //------------Pages---------------------------------------//
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import StudentListPage from '../StudentListPage/StudentListPage';
 import AddStudentPage from '../AddStudentPage/AddStudentPage';
 import EditStudentPage from '../EditStudentPage/EditStudentPage';
 import StudentDetail from '../StudentDetail/StudentDetail';
+import MainPage from '../MainPage/MainPage';
 
 //------------Components-----------------------------------//
 import NavBar from '../../components/NavBar/NavBar';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import Apple from '../../components/Apple/Apple';
+
 
 
 class App extends Component {
-
     constructor() {
         super();
         this.state = {
             students: [],
-            user: userService.getUser(),
-            
+            user: userService.getUser()
         };
     }
 
-  
-
-    componentDidMount = async () => {
-        const students = await StudentsAPI.getAll();
-        this.setState({ students });
+    handleAddStudent = async (newStudentData) => {
+        const newStudent = await studentService.create(newStudentData);
+        this.setState((state) => ({
+            students: [...state.students, newStudent]
+        }),
+            () => this.props.history.push('/details'));
     }
 
-   
-    /*--- Callback Methods ---*/
+    handleUpdateStudent = async (updatedStudentData) => {
+        const updatedStudent = await studentService.update(updatedStudentData);
+        const newStudentsArray = this.state.students.map((student) =>
+            student._id === updatedStudent._id ? updatedStudent : student
+        );
+        this.setState(
+            { students: newStudentsArray },
+            () => this.props.history.push("/details")
+        );
+    };
+
+    handleDeleteStudent = async (id) => {
+        await studentService.deleteOne(id);
+        this.setState(
+            (state) => ({
+                students: state.students.filter((student) => student._id !== id),
+            }),
+            () => this.props.history.push("/details")
+        );
+    };
+
     handleLogout = () => {
         userService.logout();
-        this.setState({ user: null, students: [] });
+        this.setState({
+            user: null,
+            students: []
+        });
     }
 
     handleSignupOrLogin = async () => {
@@ -52,100 +72,67 @@ class App extends Component {
         });
     };
 
-    handleAddStudent = async (newStudentData) => {
-        const newStudent = await StudentsAPI.create(newStudentData);
-        this.setState((state) => ({
-            students: [...state.students, newStudent]
-        }),
-            () => this.props.history.push('/all'));
+    componentDidMount = async () => {
+        const students = await studentService.getAll();
+        this.setState({ students });
     }
-
-    handleUpdateStudent = async updatedStudentData => {
-        const updatedStudent = await StudentsAPI.update(updatedStudentData);
-        // Using map to replace just the puppy that was updated
-        const newStudentsArray = this.state.students.map(s =>
-            s._id === updatedStudent._id ? updatedStudent : s
-        );
-        this.setState(
-            { students: newStudentsArray },
-            // This cb function runs after state is updated
-            () => this.props.history.push("/all")
-        );
-    };
-
-    handleDeleteStudent = async id => {
-        await StudentsAPI.deleteOne(id);
-        this.setState(
-            state => ({
-                students: state.students.filter(s => s._id !== id),
-            }),
-            () => this.props.history.push("/all")
-        );
-    };
-
-    /*--- Lifecycle Methods ---*/
-
 
     render() {
         return (
-            <>
-                <div>
-                    <Header />
-                </div>
-                <div>
-                    <NavBar
-                        user={this.state.user}
-                        handleLogout={this.handleLogout}
-                    />
+            <div>
+                <header>
+                    <div>
+                    <Header/>
+                        <NavBar
+                            user={this.state.user}
+                            handleLogout={this.handleLogout}
+                        />
+                   
+                    </div>
+                </header>
+                <main>
                     <Switch>
-                        <Route exact path='/' render={() =>
-                            <Apple />}
+                        <Route exact path="/details" render={() => (
+                            <MainPage user={this.state.user}
+                                students={this.state.students}
+                                handleDeleteStudent={this.handleDeleteStudent}
+                                
+                            />)}
                         />
-                        <Route exact path='/signup' render={({ history }) =>
-                            <SignupPage history={history} handleSignupOrLogin={this.handleSignupOrLogin}
-                            />}
+                        <Route exact path="/signup" render={({ history }) => (
+                            <SignupPage history={history}
+                                handleSignupOrLogin={this.handleSignupOrLogin}
+                            />)}
                         />
-                        <Route exact path='/login' render={({ history }) =>
-                            <LoginPage history={history} handleSignupOrLogin={this.handleSignupOrLogin}
-                            />}
+                        <Route exact path="/login" render={({ history }) => (
+                            <LoginPage history={history}
+                                handleSignupOrLogin={this.handleSignupOrLogin}
+                            />)}
                         />
-
-
-                        <Route
-                            exact
-                            path="/add"
-                            render={() => userService.getUser() ? <AddStudentPage user={this.state.user} handleAddStudent={this.handleAddStudent} />
-                        : <Redirect to='/login'/>}
+                        <Route exact path="/add" render={() => (
+                            <AddStudentPage user={this.state.user}
+                                handleAddStudent={this.handleAddStudent} />
+                        )}
                         />
-
-                        <Route exact path='/all' render={() => userService.getUser() ? 
-                            <StudentListPage students={this.state.students} handleDeleteStudent={this.handleDeleteStudent}
-                            /> :
-                        <Redirect to='/login'/>}
+                
+                        <Route exact path="/details" render={({ location }) => (
+                            <StudentDetail location={location} />
+                        )}
                         />
-
-                        <Route exact path="/edit" render={({ location }) => (userService.getUser() ? <EditStudentPage user={this.state.user}
-                            handleUpdateStudent={this.handleUpdateStudent} location={location} /> : <Redirect to='/login' />)}
+                        <Route exact path="/edit" render={({ location }) => (
+                            <EditStudentPage location={location}
+                                handleUpdateStudent={this.handleUpdateStudent}
+                            />)}
                         />
-
-                          
-
-                        <Route exact path="/details" render={({ location }) => (userService.getUser() ? <StudentDetail user={this.state.user}
-                             location={location} /> : <Redirect to='/login' />)}
-                        />
-
                     </Switch>
-                </div>
-
-
-                <div><Footer /></div>
-
-            </>
-        )
-
+                </main>
+                <Footer />
+            </div>
+        );
     }
-
-
 }
 
 export default App;
+
+
+
