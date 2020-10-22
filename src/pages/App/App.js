@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import userService from '../../utils/userService';
 import studentService from '../../utils/studentService';
+import StudentsAPI from '../../services/StudentsAPI';
 
 //------------Pages---------------------------------------//
 import SignupPage from '../SignupPage/SignupPage';
@@ -30,7 +31,7 @@ class App extends Component {
     }
 
     handleAddStudent = async (newStudentData) => {
-        const newStudent = await studentService.create(newStudentData);
+        const newStudent = await StudentsAPI.create(newStudentData);
         this.setState((state) => ({
             students: [...state.students, newStudent]
         }),
@@ -75,6 +76,7 @@ class App extends Component {
 
     componentDidMount = async () => {
         const students = await studentService.getAll();
+        console.log(students)
         this.setState({ students });
     }
 

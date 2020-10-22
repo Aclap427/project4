@@ -25,7 +25,6 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-    console.log(req.user)
     try {
         req.body.userID = req.user._id
         const student = await Student.create(req.body);

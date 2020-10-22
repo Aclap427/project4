@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 let studentSchema = new Schema({
     name: { type: String, required: true },
     grade: { type: String, default: null },
-    createdBy: {
+    userID: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
