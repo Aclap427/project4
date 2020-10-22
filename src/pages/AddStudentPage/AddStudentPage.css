@@ -6,12 +6,10 @@
     padding:20px;
     font-family: 'Josefin Sans', sans-serif;
 
+    text-align:center;
+
 }
-h1{
-    color: rgb(241, 82, 82);
-    font-family: 'Josefin Sans', sans-serif;
-    
-}
+
 
 .button {
     width: 10%;
@@ -26,5 +24,7 @@ h1{
 
 input {
     font-family: 'Josefin Sans', sans-serif;
+  
+    width:200px;
 
 }

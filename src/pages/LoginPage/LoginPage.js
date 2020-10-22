@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
 import userService from "../../utils/userService";
+import './LoginPage.css';
 
 class LoginPage extends Component {
     state = {
@@ -47,18 +48,19 @@ class LoginPage extends Component {
                 <h2>Log In</h2>
             
                 <form ref={this.formRef} autoComplete="off" onSubmit={this.handleSubmit}>
-                    <div >
-                        <label>Your email (required)</label>
+                    <div className="container">
+                        <div>
+        
                         <input  name="email" required
-                            value={this.state.formData.email} onChange={this.handleChange} />
+                            value={this.state.formData.email} placeholder="Email" onChange={this.handleChange} />
                     </div>
                     <div >
-                        <label>Your password</label>
+                  
                         <input type="password" name="password"
-                            value={this.state.formData.password} onChange={this.handleChange} />
+                            value={this.state.formData.password} placeholder="Password" onChange={this.handleChange} />
                     </div>
-                    <button type="submit"  disabled={this.state.invalidForm}>LOG IN</button>
-                </form>
+                    <button type="submit" className="button"><img src='https://i.imgur.com/LTcI0PT.png?1' alt="apple" width="35px" /></button>
+                </div></form>
             </>
         );
     }

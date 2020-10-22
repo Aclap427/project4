@@ -1,6 +1,7 @@
 
 import React from 'react';
 import StudentListItem from '../StudentListItem/StudentListItem';
+import './StudentList.css';
 
 function StudentList(props) {
     return (
@@ -8,7 +9,7 @@ function StudentList(props) {
             {!props.user || !props.students.length ? (<></>) : (
                 <div>
                     <h1>Your Records</h1>
-                    <div>
+                    <div id="allRec">
                         {props.students.map(student =>
                             <StudentListItem
                                 student={student}

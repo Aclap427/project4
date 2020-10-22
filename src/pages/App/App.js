@@ -16,6 +16,7 @@ import MainPage from '../MainPage/MainPage';
 import NavBar from '../../components/NavBar/NavBar';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import Apple from '../../components/Apple/Apple';
 
 
 
@@ -92,6 +93,9 @@ class App extends Component {
                 </header>
                 <main>
                     <Switch>
+                        <Route exact path="/" render={() => (
+                            <Apple />
+                        )} />
                         <Route exact path="/details" render={() => (
                             <MainPage user={this.state.user}
                                 students={this.state.students}

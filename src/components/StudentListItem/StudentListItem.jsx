@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './StudentListItem.css';
+
 
 function StudentListItem({ student, handleDeleteStudent }) {
     return (
-        <div>
-          
+        <div id="bit">
+            {student.name} | {student.date} | &nbsp;
             <Link to={{
-                pathname: '/details',
+                pathname: '/RecordDetails',
                 state: { student }
-            }}>{student.name}
-            {student.date}</Link>
-      
-            <button
-                onClick={() => handleDeleteStudent(student._id)
-                }>Delete</button>
-            <Link  to={{
+            }}>DETAILS</Link>
+      &nbsp; &nbsp; | &nbsp; &nbsp;
+           <Link  to={{
                 pathname: '/edit',
                 state: { student }
-            }}>Edit</Link>
+            }}>EDIT</Link>
+      &nbsp; &nbsp; | &nbsp; &nbsp; 
+            <button className="buttonRec"
+                onClick={() => handleDeleteStudent(student._id)
+                }>DELETE</button>
         </div>
     );
 }
