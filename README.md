@@ -26,7 +26,7 @@
  
  ## Getting Started:
  
- [Heroku link to Record Keeper]() | [Link to Trello Board](https://trello.com/b/z52NPkje/project-4-homeschool-record-keeping-app)
+ [Heroku link to Record Keeper](https://project4-recordkeeper.herokuapp.com/) | [Link to Trello Board](https://trello.com/b/z52NPkje/project-4-homeschool-record-keeping-app)
 
 
 ## Ice-Box Items:
